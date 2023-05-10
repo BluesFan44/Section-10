@@ -16,10 +16,10 @@ const emailReducer = (state, action) => {
 
 const passwordReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
-    return { value: action.val, isValid: action.val.trim() > 6 };
+    return { value: action.val, isValid: action.val.trim().length > 6 };
   }
   if (action.type === "INPUT_BLUR") {
-    return { value: state.value, isValid: state.value.trim() > 6 };
+    return { value: state.value, isValid: state.value.trim().length > 6 };
   }
   return { value: "", isValid: false };
 };
@@ -37,7 +37,7 @@ const Login = (props) => {
   });
 
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
-    value: "abc",
+    value: "",
     isValid: null,
   });
 
@@ -112,7 +112,7 @@ const Login = (props) => {
         >
           <label htmlFor="password">Password</label>
           <input
-            type="input"
+            type="password"
             id="password"
             value={passwordState.value}
             onChange={passwordChangeHandler}
